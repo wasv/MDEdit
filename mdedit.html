@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Journal Editor</title>
+  <link rel="stylesheet" href="lib/style.css"></link>
+  <script src="lib/marked.js"></script>
+  <script src="lib/FileSaver.min.js"></script>
+  <script>
+    function updateOut() {
+      var mdText = document.getElementById("editor").value
+      document.getElementById('content').innerHTML = marked(mdText);
+    }
+    function saveOut() {
+      var today = new Date().toLocaleDateString();
+      outHTML=""
+      outHTML+="<html><head>\n"
+      outHTML+="<title>"+today+" - Journal Entry</title>\n"
+      outHTML+="<style>\n"
+      outHTML+="html, body {height:98%;width:70%;margin:0 15%;background-color:#eee;padding:0;font: 14px \"Lucida Grande\", Helvetica, Arial, sans-serif;}"
+      outHTML+="a {color:#00B7FF;}"
+      outHTML+="</style>\n"
+      outHTML+="</head><body>\n"
+      outHTML+=document.getElementById('content').innerHTML
+      outHTML+="</body></html>"
+      var blob = new Blob([outHTML], {type: "application/html;charset=utf-8"});
+      saveAs(blob, today+".html");
+    }
+  </script>
+</head>
+<body>
+  <div class="col-wrapper">
+    <div class="col cleft">
+      <textarea id="editor" onChange="updateOut()"></textarea>
+      <button onClick="saveOut()">Save</button>
+    </div>
+    <div id="content" class="col cright"></div>
+  </div>
+</body>
+</html>
