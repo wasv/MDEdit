@@ -9,7 +9,7 @@
   <script>
     function updateOut() {
       var mdText = document.getElementById("editor").value
-      document.getElementById('content').innerHTML = marked(mdText);
+      document.getElementById('mdcontent').innerHTML = marked(mdText);
     }
     function saveOut() {
       var today = new Date().toLocaleDateString();
@@ -17,7 +17,7 @@
       outHTML+="<html><head>\n"
       outHTML+="<title>"+today+" - Journal Entry</title>\n"
       outHTML+="<style>\n"
-      outHTML+="html, body {height:98%;width:70%;margin:0 15%;background-color:#eee;padding:0;font: 14px \"Lucida Grande\", Helvetica, Arial, sans-serif;}"
+      outHTML+="html, body {height:98%;width:70%;margin:0 15%;background-color:#eee;padding:0;font: 14px \"Lucida Grande\", Helvetica, Arial, sans-serif;} img {width:80%;}"
       outHTML+="a {color:#555;}"
       outHTML+="</style>\n"
       outHTML+="</head><body>\n"
@@ -26,17 +26,31 @@
       var blob = new Blob([outHTML], {type: "application/html;charset=utf-8"});
       saveAs(blob, today+".html");
     }
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          var img = document.createElement("img");
+          img.setAttribute("src", e.target.result);
+          document.getElementById("content").appendChild(img);
+        }
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
   </script>
 </head>
 <body>
   <div class="col-wrapper">
     <div class="col cleft">
       <textarea id="editor" onChange="updateOut()"></textarea>
+      <input type='file' id="imgInp" onChange="readURL(this)" />
       <button onClick="saveOut()">Save</button>
       <a href="http://daringfireball.net/projects/markdown/syntax">Markdown Syntax</a>
       <a href="http://www.wastevensv.com/">Made by William A Stevens V</a>
     </div>
-    <div id="content" class="col cright"></div>
+    <div id="content" class="col cright">
+      <div id="mdcontent"></div>
+    </div>
   </div>
 </body>
 </html>
