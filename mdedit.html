@@ -18,7 +18,7 @@
       outHTML+="<title>"+today+" - Journal Entry</title>\n"
       outHTML+="<style>\n"
       outHTML+="html, body {height:98%;width:70%;margin:0 15%;background-color:#eee;padding:0;font: 14px \"Lucida Grande\", Helvetica, Arial, sans-serif;}"
-      outHTML+="a {color:#00B7FF;}"
+      outHTML+="a {color:#555;}"
       outHTML+="</style>\n"
       outHTML+="</head><body>\n"
       outHTML+=document.getElementById('content').innerHTML
@@ -33,6 +33,8 @@
     <div class="col cleft">
       <textarea id="editor" onChange="updateOut()"></textarea>
       <button onClick="saveOut()">Save</button>
+      <a href="http://daringfireball.net/projects/markdown/syntax">Markdown Syntax</a>
+      <a href="http://www.wastevensv.com/">Made by William A Stevens V</a>
     </div>
     <div id="content" class="col cright"></div>
   </div>
