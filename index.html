@@ -44,15 +44,22 @@
 </head>
 <body>
   <div class="col-wrapper">
-    <div class="col cleft">
+    <div class="col colleft">
       <input id="entryTitle" placeholder="Entry Title" onChange="updateOut()"/>
       <textarea id="editor" onChange="updateOut()"></textarea>
-      <input type='file' id="imgInp" onChange="readURL(this)" />
-      <button onClick="saveOut()">Save</button>
-      <a href="http://daringfireball.net/projects/markdown/syntax">Markdown Syntax</a>
-      <a href="http://www.wastevensv.com/">Made by William A Stevens V</a>
+      <label>Image: </label><input type='file' id="imgInp" accept="image/*" onChange="readURL(this)" />
+      <button class="floatright" onClick="saveOut()">Save</button><br/>
+      <div id="help">
+        <hr/>
+        <b> Instructions </b><br/>
+        A simple browser based markdown editor. <br/>
+        Enter markdown on the left, get HTML on the right. <br/>
+        Hit the Save button to export it. <br/>
+        <a href="http://daringfireball.net/projects/markdown/syntax">Markdown Syntax</a>
+        <a class="floatright" href="http://projects.wastevensv.com/">Made by William A Stevens V</a>
+      </div>
     </div>
-    <div id="content" class="col cright">
+    <div id="content" class="col colright">
       <div id="mdcontent"></div>
     </div>
   </div>

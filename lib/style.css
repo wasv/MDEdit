@@ -10,29 +10,32 @@
   .col{
     height:100%;
   }
-  .cleft{
+  .colleft{
     width:40%;
     margin-left:20px;
     margin-right:10px;
     position:fixed;
   }
-  .cright{
+  .colright{
     width:40%;
     margin-left:50%;
     margin-right:20px;
   }
+  .floatright{
+    float:right;
+  }
   #editor{
     width:100%;
-    height:80%;
+    height:70%;
     resize:none;
   }
-  input {
+  #entryTitle {
     width:100%;
     height:2.5%;
     border:solid 1px #ccc;
     border-radius:5px;
   }
-  input:focus {
+  #entryTitle:focus {
     outline:none;
     border-color:#aaa;
   }
