@@ -1,54 +1,60 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Mdedit : A simple browser based markdown editor.">
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Mdedit</title>
-  </head>
-
-  <body>
-
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/wastevensv/MDEdit">View on GitHub</a>
-
-          <h1 id="project_title">Mdedit</h1>
-          <h2 id="project_tagline">A simple browser based markdown editor.</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/wastevensv/MDEdit/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/wastevensv/MDEdit/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
+<head>
+  <meta charset="utf-8"/>
+  <title>Journal Editor</title>
+  <link rel="stylesheet" href="lib/style.css"></link>
+  <script src="lib/marked.js"></script>
+  <script src="lib/FileSaver.min.js"></script>
+  <script>
+    function updateOut() {
+      var mdText = document.getElementById("editor").value
+      output  = ""
+      output += "<h1>"+document.getElementById('entryTitle').value+"</h1>\n"
+      output += marked(mdText)
+      document.getElementById('mdcontent').innerHTML = output;
+    }
+    function saveOut() {
+      var entryTitle = document.getElementById('entryTitle').value
+      outHTML =""
+      outHTML+="<html><head>\n"
+      outHTML+="<title>"+entryTitle+"</title>\n"
+      outHTML+="<style>\n"
+      outHTML+="html, body {height:98%;width:70%;margin:0 15%;background-color:#eee;padding:0;font: 14px \"Lucida Grande\", Helvetica, Arial, sans-serif;} img {width:80%;}"
+      outHTML+="a {color:#555;}"
+      outHTML+="</style>\n"
+      outHTML+="</head><body>\n"
+      outHTML+=document.getElementById('content').innerHTML
+      outHTML+="</body></html>"
+      var blob = new Blob([outHTML], {type: "application/html;charset=utf-8"});
+      saveAs(blob, entryTitle+".html");
+    }
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          var img = document.createElement("img");
+          img.setAttribute("src", e.target.result);
+          document.getElementById("content").appendChild(img);
+        }
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="col-wrapper">
+    <div class="col cleft">
+      <input id="entryTitle" placeholder="Entry Title" onChange="updateOut()"/>
+      <textarea id="editor" onChange="updateOut()"></textarea>
+      <input type='file' id="imgInp" onChange="readURL(this)" />
+      <button onClick="saveOut()">Save</button>
+      <a href="http://daringfireball.net/projects/markdown/syntax">Markdown Syntax</a>
+      <a href="http://www.wastevensv.com/">Made by William A Stevens V</a>
     </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h1>
-<a id="mdedit" class="anchor" href="#mdedit" aria-hidden="true"><span class="octicon octicon-link"></span></a>MDEdit</h1>
-
-<p>A simple browser based markdown editor. Enter markdown on the left, get HTML on the right. Hit the Save button to export it. I plan to use it for journaling.</p>
-
-<p><strong><a href="mdedit.html">Demo</a></strong></p>
-      </section>
+    <div id="content" class="col cright">
+      <div id="mdcontent"></div>
     </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Mdedit maintained by <a href="https://github.com/wastevensv">wastevensv</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-    
-
-  </body>
+  </div>
+</body>
 </html>
