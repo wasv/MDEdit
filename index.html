@@ -6,6 +6,11 @@
   <link rel="stylesheet" href="lib/style.css"></link>
   <script src="lib/marked.min.js"></script>
   <script src="lib/FileSaver.min.js"></script>
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.1.1/gh-fork-ribbon.min.css" />
+  <!--[if lt IE 9]>
+      <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.1.1/gh-fork-ribbon.ie.min.css" />
+  <![endif]-->
+
   <script>
     function updateOut() {
       var mdText = document.getElementById("editor").value
@@ -63,5 +68,10 @@
       <div id="mdcontent"></div>
     </div>
   </div>
+  <div class="github-fork-ribbon-wrapper right-bottom">
+    <div class="github-fork-ribbon">
+      <a href="https://github.com/wastevensv/MDEdit">Fork me on GitHub</a>
+    </div>
+  </div> 
 </body>
 </html>
